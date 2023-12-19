@@ -3,15 +3,16 @@
 using std::cout;
 
 void displayProcesses(std::vector<ProcessInfo> info) {
-	cout << "PID\t\tarrival\t\texecution\tservice\n";
-	for (auto item : info) {
+	cout << "\nPID\t\tarrival\t\tburst\t\tstart\t\tcompletion\n";
+	for (const auto& item : info) {
 		cout << item.processID << "\t\t" << item.arrivalTime << "\t\t"
-			<< item.executeTime << "\t\t" << item.serviceTime << "\n";
+			<< item.burstTime << "\t\t" << item.startTime << "\t\t" 
+			<< item.completionTime << "\n";
 	}
 }
 
 void displayAlgorithmStats(AlgorithmStats stats) {
-	cout << "\nAlgorithm:\t";
+	cout << "\nAlgorithm:\t\t";
 	switch (stats.algorithm) {
 	case SchedulerAlgorithms::FCFS:
 		cout << "FCFS\n";
@@ -27,7 +28,8 @@ void displayAlgorithmStats(AlgorithmStats stats) {
 		break;
 	}
 	
-	cout << "Avg Throughput:\t" << stats.avgThroughput << "\n";
-	cout << "Avg Wait Time:\t" << stats.avgWaitTime << "\n";
-	cout << "Avg Latency:\t" << stats.avgLatency << "\n";
+	cout << "CPU Utilization:\t" << stats.cpuUtilization << "\n";
+	cout << "Avg Throughput:\t\t" << stats.avgThroughput << "\n";
+	cout << "Avg Turnaround Time:\t" << stats.avgTurnaroundTime << "\n";
+	cout << "Avg Wait Time:\t\t" << stats.avgWaitTime << "\n";
 }

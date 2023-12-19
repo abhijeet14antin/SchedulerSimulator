@@ -7,11 +7,9 @@
 
 using std::vector;
 
-class Scheduler 
-{
-private:
+class Scheduler {
+public:
 	vector<ProcessInfo> processInfo;
 
-public:
-	Scheduler(vector<ProcessInfo> processList);
+	Scheduler(vector<ProcessInfo>& processList);
 };

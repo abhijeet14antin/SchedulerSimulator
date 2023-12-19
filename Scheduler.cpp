@@ -1,5 +1,5 @@
 #include "Scheduler.hpp"
 
-Scheduler::Scheduler(vector<ProcessInfo> processList) : processInfo(processList) {
+Scheduler::Scheduler(vector<ProcessInfo>& processList) : processInfo(processList) {
 
 }

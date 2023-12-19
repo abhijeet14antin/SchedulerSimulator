@@ -16,14 +16,24 @@ int main() {
     vector<ProcessInfo> processInfo = generateRandomProcesses();
     displayProcesses(processInfo);
     Scheduler scheduler(processInfo);
-    AlgorithmStats stats =  FCFS(scheduler);
+
+    AlgorithmStats stats = FCFS(scheduler);
+    displayProcesses(scheduler.processInfo);
     displayAlgorithmStats(stats);
+
+    /*
     stats = SJF(scheduler);
+    displayProcesses(processInfo);
     displayAlgorithmStats(stats);
+
     stats = SRT(scheduler);
+    displayProcesses(processInfo);
     displayAlgorithmStats(stats);
+
     stats = RR(scheduler);
+    displayProcesses(processInfo);
     displayAlgorithmStats(stats);
+    */
 }
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu
