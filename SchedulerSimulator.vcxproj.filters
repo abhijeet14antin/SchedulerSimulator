@@ -18,7 +18,7 @@
     <ClCompile Include="SchedulerSimulator.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="SchedulerClass.cpp">
+    <ClCompile Include="Scheduler.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="ProcessInfo.cpp">
@@ -35,7 +35,7 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="SchedulerClass.hpp">
+    <ClInclude Include="Scheduler.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="ProcessInfo.hpp">

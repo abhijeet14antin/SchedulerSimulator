@@ -9,3 +9,25 @@ void displayProcesses(std::vector<ProcessInfo> info) {
 			<< item.executeTime << "\t\t" << item.serviceTime << "\n";
 	}
 }
+
+void displayAlgorithmStats(AlgorithmStats stats) {
+	cout << "\nAlgorithm:\t";
+	switch (stats.algorithm) {
+	case SchedulerAlgorithms::FCFS:
+		cout << "FCFS\n";
+		break;
+	case SchedulerAlgorithms::SJF:
+		cout << "SJF\n";
+		break;
+	case SchedulerAlgorithms::SRT:
+		cout << "SRT\n";
+		break;
+	case SchedulerAlgorithms::RR:
+		cout << "RR\n";
+		break;
+	}
+	
+	cout << "Avg Throughput:\t" << stats.avgThroughput << "\n";
+	cout << "Avg Wait Time:\t" << stats.avgWaitTime << "\n";
+	cout << "Avg Latency:\t" << stats.avgLatency << "\n";
+}

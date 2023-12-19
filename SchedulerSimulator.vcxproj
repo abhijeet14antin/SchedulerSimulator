@@ -131,7 +131,7 @@
     <ClCompile Include="Display.cpp" />
     <ClCompile Include="ProcessGenerator.cpp" />
     <ClCompile Include="ProcessInfo.cpp" />
-    <ClCompile Include="SchedulerClass.cpp">
+    <ClCompile Include="Scheduler.cpp">
       <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Users\abhij\source\repos\SchedulerSimulator</AdditionalIncludeDirectories>
       <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\Users\abhij\source\repos\SchedulerSimulator</AdditionalIncludeDirectories>
     </ClCompile>
@@ -143,7 +143,7 @@
     <ClInclude Include="Enums.hpp" />
     <ClInclude Include="ProcessGenerator.hpp" />
     <ClInclude Include="ProcessInfo.hpp" />
-    <ClInclude Include="SchedulerClass.hpp" />
+    <ClInclude Include="Scheduler.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

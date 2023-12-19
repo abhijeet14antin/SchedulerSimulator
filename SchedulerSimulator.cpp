@@ -6,16 +6,24 @@
 #include <vector>
 
 #include "enums.hpp"
-#include "SchedulerClass.hpp"
+#include "Scheduler.hpp"
 #include "ProcessGenerator.hpp"
 #include "Display.hpp"
+#include "Algorithms.hpp"
 
-int main()
-{
+int main() {
     std::cout << "For now, using hardcoded parameters\n";
     vector<ProcessInfo> processInfo = generateRandomProcesses();
     displayProcesses(processInfo);
-    //Scheduler scheduler(processInfo);
+    Scheduler scheduler(processInfo);
+    AlgorithmStats stats =  FCFS(scheduler);
+    displayAlgorithmStats(stats);
+    stats = SJF(scheduler);
+    displayAlgorithmStats(stats);
+    stats = SRT(scheduler);
+    displayAlgorithmStats(stats);
+    stats = RR(scheduler);
+    displayAlgorithmStats(stats);
 }
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu

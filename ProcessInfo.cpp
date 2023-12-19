@@ -1,7 +1,6 @@
 #include "ProcessInfo.hpp"
 
-ProcessInfo::ProcessInfo()
-{
+ProcessInfo::ProcessInfo() {
 	// Value of 0 means invalid for all fields
 	processID = 0;
 	arrivalTime = 0;
