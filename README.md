@@ -5,6 +5,9 @@ A project to simulate CPU scheduling and to compare statistics across various sc
 ## Simulation Framework
 
 text
+- densely populated
+- sparsely populated
+- moderately populated
 
 ## Scheduling Algorithms
 
@@ -25,3 +28,32 @@ description
 ### Round Robin (RR)
 
 description
+
+## Results
+
+### densely populated
+
+|      | FCFS | SJF | SRTF | RR |
+|:------:|:------:|:-----:|:------:|:----:|
+| CPU Utilization | 0 | 0 | 0 | 0 |
+| Throughput | 0 | 0 | 0 | 0 |
+| Average Turnaround Time | 0 | 0 | 0 | 0 |
+| Average Wait Time | 0 | 0 | 0 | 0 |
+
+### sparsely populated
+
+|      | FCFS | SJF | SRTF | RR |
+|:------:|:------:|:-----:|:------:|:----:|
+| CPU Utilization | 0 | 0 | 0 | 0 |
+| Throughput | 0 | 0 | 0 | 0 |
+| Average Turnaround Time | 0 | 0 | 0 | 0 |
+| Average Wait Time | 0 | 0 | 0 | 0 |
+
+### moderately populated
+
+|      | FCFS | SJF | SRTF | RR |
+|:------:|:------:|:-----:|:------:|:----:|
+| CPU Utilization | 0 | 0 | 0 | 0 |
+| Throughput | 0 | 0 | 0 | 0 |
+| Average Turnaround Time | 0 | 0 | 0 | 0 |
+| Average Wait Time | 0 | 0 | 0 | 0 |
