@@ -20,8 +20,8 @@ void displayAlgorithmStats(AlgorithmStats stats) {
 	case SchedulerAlgorithms::SJF:
 		cout << "SJF\n";
 		break;
-	case SchedulerAlgorithms::SRT:
-		cout << "SRT\n";
+	case SchedulerAlgorithms::SRTF:
+		cout << "SRTF\n";
 		break;
 	case SchedulerAlgorithms::RR:
 		cout << "RR\n";
@@ -32,4 +32,9 @@ void displayAlgorithmStats(AlgorithmStats stats) {
 	cout << "Avg Throughput:\t\t" << stats.avgThroughput << "\n";
 	cout << "Avg Turnaround Time:\t" << stats.avgTurnaroundTime << "\n";
 	cout << "Avg Wait Time:\t\t" << stats.avgWaitTime << "\n";
+	cout << "Busy Cycles:\t\t" << stats.busyCycles << "\n";
+	cout << "Free Cycles:\t\t" << stats.freeCycles << "\n";
+	cout << "Total Cycles:\t\t" << stats.currentCycle<< "\n";
+	cout << "Toal Turnaround Time:\t" << stats.totalTurnaroundTime << "\n";
+	cout << "Total Wait Time:\t" << stats.totalWaitTime << "\n";
 }

@@ -6,11 +6,21 @@ ProcessInfo::ProcessInfo() {
 	arrivalTime = 0;
 	startTime = 0;
 	burstTime = 0;
+	remainingTime = 0;
 	completionTime = 0;
-	isCompleted = false;
+	index = 0;
 }
 
-bool ProcessInfo::operator<(const ProcessInfo& other) {
-	return (arrivalTime < other.arrivalTime) 
-		|| (arrivalTime == other.arrivalTime && burstTime < other.burstTime);
+/*	Object to compare using arrival time + burst time
+*/
+bool ArrivalTimeComparator::operator() (const ProcessInfo& a, const ProcessInfo& b) {
+	return (a.arrivalTime < b.arrivalTime)
+		|| (a.arrivalTime == b.arrivalTime && a.burstTime < b.burstTime);
+}
+
+/*	Object to compare using burst time + arrival time
+*/
+bool BurstTimeComparator::operator() (const ProcessInfo& a, const ProcessInfo& b) {
+	return (a.burstTime > b.burstTime)
+		|| (a.burstTime == b.burstTime && a.arrivalTime > b.arrivalTime);
 }

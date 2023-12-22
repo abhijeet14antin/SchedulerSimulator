@@ -1,6 +1,9 @@
 #pragma once
 
 #include <cstdint>
+#include <queue>
+#include <unordered_map>
+
 #include "Scheduler.hpp"
 
 /*	Object to store statistics per algorithm
@@ -25,6 +28,6 @@ AlgorithmStats FCFS(Scheduler& scheduler);
 
 AlgorithmStats SJF(Scheduler& scheduler);
 
-AlgorithmStats SRT(Scheduler& scheduler);
+AlgorithmStats SRTF(Scheduler& scheduler);
 
 AlgorithmStats RR(Scheduler& scheduler);

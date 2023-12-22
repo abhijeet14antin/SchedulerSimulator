@@ -11,27 +11,33 @@
 #include "Display.hpp"
 #include "Algorithms.hpp"
 
+void test() {
+
+}
+
 int main() {
+
+    test();
+
     std::cout << "For now, using hardcoded parameters\n";
     vector<ProcessInfo> processInfo = generateRandomProcesses();
-    displayProcesses(processInfo);
     Scheduler scheduler(processInfo);
 
     AlgorithmStats stats = FCFS(scheduler);
     displayProcesses(scheduler.processInfo);
     displayAlgorithmStats(stats);
 
-    /*
     stats = SJF(scheduler);
-    displayProcesses(processInfo);
+    displayProcesses(scheduler.processInfo);
     displayAlgorithmStats(stats);
 
+    /*
     stats = SRT(scheduler);
-    displayProcesses(processInfo);
+    displayProcesses(scheduler.processInfo);
     displayAlgorithmStats(stats);
 
     stats = RR(scheduler);
-    displayProcesses(processInfo);
+    displayProcesses(scheduler.processInfo);
     displayAlgorithmStats(stats);
     */
 }
