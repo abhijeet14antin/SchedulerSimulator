@@ -11,6 +11,15 @@ void displayProcesses(std::vector<ProcessInfo> info) {
 	}
 }
 
+void displayProcessesFromPtrs(std::vector<std::shared_ptr<ProcessInfo>> infoPtrs) {
+	cout << "\nPID\t\tarrival\t\tburst\t\tstart\t\tcompletion\n";
+	for (const auto& itemPtr : infoPtrs) {
+		cout << itemPtr->processID << "\t\t" << itemPtr->arrivalTime << "\t\t"
+			<< itemPtr->burstTime << "\t\t" << itemPtr->startTime << "\t\t"
+			<< itemPtr->completionTime << "\n";
+	}
+}
+
 void displayAlgorithmStats(AlgorithmStats stats) {
 	cout << "\nAlgorithm:\t\t";
 	switch (stats.algorithm) {

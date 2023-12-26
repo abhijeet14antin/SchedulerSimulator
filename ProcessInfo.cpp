@@ -9,6 +9,7 @@ ProcessInfo::ProcessInfo() {
 	remainingTime = 0;
 	completionTime = 0;
 	index = 0;
+	isStarted = false;
 }
 
 /*	Object to compare using arrival time + burst time
@@ -23,4 +24,11 @@ bool ArrivalTimeComparator::operator() (const ProcessInfo& a, const ProcessInfo&
 bool BurstTimeComparator::operator() (const ProcessInfo& a, const ProcessInfo& b) {
 	return (a.burstTime > b.burstTime)
 		|| (a.burstTime == b.burstTime && a.arrivalTime > b.arrivalTime);
+}
+
+/*	Object to compare using remaining time + arrival time
+*/
+bool RemainingTimeComparator::operator() (const ProcessInfo& a, const ProcessInfo& b) {
+	return (a.remainingTime > b.remainingTime)
+		|| (a.remainingTime == b.remainingTime && a.arrivalTime > b.arrivalTime);
 }

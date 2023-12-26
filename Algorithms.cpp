@@ -53,8 +53,7 @@ AlgorithmStats SJF(Scheduler& scheduler) {
 	stats.algorithm = SchedulerAlgorithms::SJF;
 	size_t size = scheduler.processInfo.size();
 	
-	/*	Priority queue to store new processes as they arrive and sort based on length 
-	 *	of jobs remaining
+	/*	Priority queue to store new processes as they arrive and sort based on job length
 	 */
 	std::priority_queue<ProcessInfo, vector<ProcessInfo>, BurstTimeComparator> pq;
 	uint32_t processIdx = 0;
@@ -115,9 +114,83 @@ AlgorithmStats SRTF(Scheduler& scheduler) {
 	return stats;
 }
 
-AlgorithmStats RR(Scheduler& scheduler) {
+AlgorithmStats RR(Scheduler& scheduler, uint32_t numCyclesPerRound) {
 	AlgorithmStats stats;
 	stats.algorithm = SchedulerAlgorithms::RR;
+	size_t size = scheduler.processInfo.size();
+
+	/*	Circular Queue to store current running processes
+	 */
+	CircularQueue cq(100);
+	uint32_t processIdx = 0;
+	ProcessInfo process;
+	uint32_t numCyclesInCurrentRound = 1;
+	bool isProcessRunning = false;
+
+	while (processIdx < scheduler.processInfo.size() || cq.currentSize != 0) {
+		/*	First add any new processes that may have arrived, unless circular queue is full
+		 */
+		while (processIdx < size && scheduler.processInfo[processIdx].arrivalTime <= stats.currentCycle) {
+			bool enqueueSuccess = cq.enqueue(scheduler.processInfo[processIdx]);
+			if (enqueueSuccess) {
+				processIdx++;
+			}
+			else {
+				break;
+			}
+		}
+		/*	If no process is running, get a new one from queue. If no processes in queue, continue to next cycle
+		 */
+		if (!isProcessRunning) {
+			ProcessInfo temp;
+			bool dequeueSuccess = cq.dequeue(temp);
+			if (dequeueSuccess) {
+				process = temp;
+				isProcessRunning = true;
+				/*	If new process, save start time
+				 */
+				if (!process.isStarted) {
+					process.startTime = stats.currentCycle;
+					process.isStarted = true;
+					scheduler.processInfo[process.index] = process;
+				}
+			}
+		}
+		/*	Give current process additional cycles until round is completed
+		 */
+		if (isProcessRunning) {
+			process.remainingTime--;
+			if (process.remainingTime == 0) {
+				process.completionTime = stats.currentCycle;
+				scheduler.processInfo[process.index] = process;
+				numCyclesInCurrentRound = 1;
+				isProcessRunning = false;
+				stats.commandsProcessed += 1;
+				stats.totalWaitTime += process.startTime - process.arrivalTime;
+				stats.totalTurnaroundTime += process.completionTime - process.arrivalTime;
+			}
+			else if (numCyclesInCurrentRound < numCyclesPerRound) {
+				numCyclesInCurrentRound++;
+			}
+			else {
+				// TODO: handle full circular queue below
+				cq.enqueue(process);
+				numCyclesInCurrentRound = 1;
+				isProcessRunning = false;
+			}
+			stats.busyCycles++;
+		}
+		else {
+			stats.freeCycles++;
+		}
+		//std::cout << stats.currentCycle << "\t" << process.processID << "\n";
+		stats.currentCycle++;
+	}
+
+	stats.cpuUtilization = (double)stats.busyCycles / stats.currentCycle;
+	stats.avgThroughput = (double)stats.commandsProcessed / stats.currentCycle;
+	stats.avgTurnaroundTime = (double)stats.totalTurnaroundTime / size;
+	stats.avgWaitTime = (double)stats.totalWaitTime / size;
 
 	return stats;
 }

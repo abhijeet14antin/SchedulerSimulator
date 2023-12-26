@@ -12,6 +12,7 @@ public:
 	uint32_t remainingTime;		// Time remaining for current process
 	uint32_t completionTime;	// Time instant that process completes
 	uint32_t index;				// Index within vector, needed to update startTime, completionTime in original vector
+	bool isStarted;				// Indicates whether process has started or not
 	ProcessInfo();
 };
 
@@ -25,6 +26,13 @@ public:
 /*	Object to compare using burst time + arrival time
 */
 class BurstTimeComparator {
+public:
+	bool operator() (const ProcessInfo& a, const ProcessInfo& b);
+};
+
+/*	Object to compare using remaining time + arrival time
+*/
+class RemainingTimeComparator {
 public:
 	bool operator() (const ProcessInfo& a, const ProcessInfo& b);
 };

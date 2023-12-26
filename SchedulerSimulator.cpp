@@ -35,11 +35,11 @@ int main() {
     stats = SRT(scheduler);
     displayProcesses(scheduler.processInfo);
     displayAlgorithmStats(stats);
+    */
 
-    stats = RR(scheduler);
+    stats = RR(scheduler, 1);
     displayProcesses(scheduler.processInfo);
     displayAlgorithmStats(stats);
-    */
 }
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu

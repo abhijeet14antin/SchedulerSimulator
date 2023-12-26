@@ -5,6 +5,7 @@
 #include <unordered_map>
 
 #include "Scheduler.hpp"
+#include "CircularQueue.hpp"
 
 /*	Object to store statistics per algorithm
  */
@@ -30,4 +31,4 @@ AlgorithmStats SJF(Scheduler& scheduler);
 
 AlgorithmStats SRTF(Scheduler& scheduler);
 
-AlgorithmStats RR(Scheduler& scheduler);
+AlgorithmStats RR(Scheduler& scheduler, uint32_t numCycles);
