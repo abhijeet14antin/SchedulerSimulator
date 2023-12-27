@@ -21,25 +21,40 @@ int main() {
 
     std::cout << "For now, using hardcoded parameters\n";
     vector<ProcessInfo> processInfo = generateRandomProcesses();
-    Scheduler scheduler(processInfo);
+    Scheduler* scheduler;
 
-    AlgorithmStats stats = FCFS(scheduler);
-    displayProcesses(scheduler.processInfo);
+    bool displayProcessInfo = false;
+    
+    scheduler = new Scheduler(processInfo);
+    AlgorithmStats stats = FCFS(*scheduler);
+    if (displayProcessInfo) displayProcesses(scheduler->processInfo);
     displayAlgorithmStats(stats);
 
-    stats = SJF(scheduler);
-    displayProcesses(scheduler.processInfo);
+    scheduler = new Scheduler(processInfo);
+    stats = SJF(*scheduler);
+    if (displayProcessInfo) displayProcesses(scheduler->processInfo);
     displayAlgorithmStats(stats);
 
+    scheduler = new Scheduler(processInfo);
+    stats = RR(*scheduler, 1);
+    if (displayProcessInfo) displayProcesses(scheduler->processInfo);
+    displayAlgorithmStats(stats);
+
+    scheduler = new Scheduler(processInfo);
+    stats = RR(*scheduler, 2);
+    if (displayProcessInfo) displayProcesses(scheduler->processInfo);
+    displayAlgorithmStats(stats);
+
+    scheduler = new Scheduler(processInfo);
+    stats = RR(*scheduler, 5);
+    if (displayProcessInfo) displayProcesses(scheduler->processInfo);
+    displayAlgorithmStats(stats);
+    
     /*
-    stats = SRT(scheduler);
+    stats = SRTF(scheduler);
     displayProcesses(scheduler.processInfo);
     displayAlgorithmStats(stats);
     */
-
-    stats = RR(scheduler, 1);
-    displayProcesses(scheduler.processInfo);
-    displayAlgorithmStats(stats);
 }
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu

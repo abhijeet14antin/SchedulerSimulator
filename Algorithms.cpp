@@ -128,6 +128,10 @@ AlgorithmStats RR(Scheduler& scheduler, uint32_t numCyclesPerRound) {
 	bool isProcessRunning = false;
 
 	while (processIdx < scheduler.processInfo.size() || cq.currentSize != 0) {
+		if (stats.currentCycle > 50) {
+			//break;
+		}
+		//std::cout << "Cycle: " << stats.currentCycle << "\n";
 		/*	First add any new processes that may have arrived, unless circular queue is full
 		 */
 		while (processIdx < size && scheduler.processInfo[processIdx].arrivalTime <= stats.currentCycle) {
@@ -160,8 +164,10 @@ AlgorithmStats RR(Scheduler& scheduler, uint32_t numCyclesPerRound) {
 		 */
 		if (isProcessRunning) {
 			process.remainingTime--;
+			//std::cout << "processID: " << process.processID << "\n";
 			if (process.remainingTime == 0) {
-				process.completionTime = stats.currentCycle;
+				//std::cout << "remaining time = 0\n";
+				process.completionTime = stats.currentCycle + 1;
 				scheduler.processInfo[process.index] = process;
 				numCyclesInCurrentRound = 1;
 				isProcessRunning = false;
@@ -170,10 +176,12 @@ AlgorithmStats RR(Scheduler& scheduler, uint32_t numCyclesPerRound) {
 				stats.totalTurnaroundTime += process.completionTime - process.arrivalTime;
 			}
 			else if (numCyclesInCurrentRound < numCyclesPerRound) {
+				//std::cout << "numCycles < max\n";
 				numCyclesInCurrentRound++;
 			}
 			else {
 				// TODO: handle full circular queue below
+				//std::cout << "numCycles = max\n";
 				cq.enqueue(process);
 				numCyclesInCurrentRound = 1;
 				isProcessRunning = false;
@@ -183,7 +191,7 @@ AlgorithmStats RR(Scheduler& scheduler, uint32_t numCyclesPerRound) {
 		else {
 			stats.freeCycles++;
 		}
-		//std::cout << stats.currentCycle << "\t" << process.processID << "\n";
+		//std::cout << stats.currentCycle << "\t" << process.processID << "\t" << process.remainingTime << "\n";
 		stats.currentCycle++;
 	}
 
