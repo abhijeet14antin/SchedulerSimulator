@@ -1,19 +1,6 @@
 # CPU Scheduler Simulator
 A project to simulate CPU scheduling and to compare statistics across various scheduling algorithms.
 
-## Simulation Framework
-In phases I-III, each process is an object with the following randomly generated fields:
-- process ID - to identify each process
-- arrival time - when the process arrived at the scheduler
-- burst time - expected number of cycles to run this process
-The limits for the above fields can be customized.
-
-A vector of processes is passed to the scheduler, and the scheduler simulates the various algorithms and calculates the following statistics for each:
-- CPU Utilization
-- Throughput
-- Average Turnaround Time
-- Average Wait Time
-
 ## Project Phases
 The project is split into the following phases:
 
@@ -36,6 +23,19 @@ The project is split into the following phases:
  - Multi Core
  - The processes have priorities
  - Simulation using a multiple threads. Each process will run in a separate thread
+
+## Simulation Framework
+In phases I-III, each process is an object with the following randomly generated fields:
+- process ID - to identify each process
+- arrival time - when the process arrived at the scheduler
+- burst time - expected number of cycles to run this process
+The limits for the above fields can be customized.
+
+A vector of processes is passed to the scheduler, and the scheduler simulates the various algorithms and calculates the following statistics for each:
+- CPU Utilization
+- Throughput
+- Average Turnaround Time
+- Average Wait Time
 
 ## Scheduling Algorithms
 These are the basic algorithms that we will be implementing in the various phases
