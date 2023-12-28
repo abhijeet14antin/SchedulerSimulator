@@ -64,5 +64,5 @@ n = 200
 |:------:|:------:|:-----:|:------:|
 | CPU Utilization |  0.999811 |  0.999811 |  0.999811 |
 | Throughput (processes completed / cycles taken) | 0.0188733 | 0.0188733 | 0.0188733 |
-| Average Turnaround Time (in CPU cycles) | 5005.69 | 3487.11 | 6443.99 |
-| Average Wait Time (in CPU cycles) | 4952.71 | 3434.14 | 1971.88 |
+| Average Turnaround Time (in CPU cycles) | 5005.69 | 3487.11 | 6988.02 |
+| Average Wait Time (in CPU cycles) | 4952.71 | 3434.14 | 96.65 |
