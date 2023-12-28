@@ -134,7 +134,7 @@ AlgorithmStats RR(Scheduler& scheduler, uint32_t numCyclesPerRound) {
 	size_t size = scheduler.processInfo.size();
 
 	/** Circular Queue to store current running processes */
-	CircularQueue cq(100);
+	CircularQueue cq(500);
 	uint32_t processIdx = 0;
 	ProcessInfo process;
 	uint32_t numCyclesInCurrentRound = 1;
@@ -204,7 +204,12 @@ AlgorithmStats RR(Scheduler& scheduler, uint32_t numCyclesPerRound) {
 		//std::cout << stats.currentCycle << "\t" << process.processID << "\t" << process.remainingTime << "\n";
 		stats.currentCycle++;
 	}
-
+	/** Include stats of process that was last dequeued */
+	stats.busyCycles += process.remainingTime;
+	stats.currentCycle += process.remainingTime;
+	process.completionTime = stats.currentCycle;
+	scheduler.processInfo[process.index] = process;
+	/** Calculate final stats */
 	stats.cpuUtilization = (double)stats.busyCycles / stats.currentCycle;
 	stats.avgThroughput = (double)stats.commandsProcessed / stats.currentCycle;
 	stats.avgTurnaroundTime = (double)stats.totalTurnaroundTime / size;

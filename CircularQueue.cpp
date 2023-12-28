@@ -28,7 +28,7 @@ CircularQueue::CircularQueue(uint32_t maxSize) {
  * \return whether enqueue was successful
  */
 bool CircularQueue::enqueue(const ProcessInfo& input) {
-	// If full, return failure
+	/** If full, return failure */
 	if (currentSize == maxSize) {
 		return false;
 	}
@@ -48,7 +48,7 @@ bool CircularQueue::enqueue(const ProcessInfo& input) {
  * \return whether dequeu was successful
  */
 bool CircularQueue::dequeue(ProcessInfo& output) {
-	// If empty, return failure
+	/** If empty, return failure */
 	if (currentSize == 0) {
 		return false;
 	}
