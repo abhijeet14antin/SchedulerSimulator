@@ -34,7 +34,7 @@ int main() {
     test();
 
     std::cout << "For now, using hardcoded parameters\n";
-    vector<ProcessInfo> processInfo = generateRandomProcesses();
+    std::vector<ProcessInfo> processInfo = generateRandomProcesses();
     Scheduler* scheduler;
 
     bool displayProcessInfo = false;

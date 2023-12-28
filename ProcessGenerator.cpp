@@ -13,7 +13,7 @@
  * 
  * \return A vector of processes generated
  */
-vector<ProcessInfo> generateRandomProcesses()
+std::vector<ProcessInfo> generateRandomProcesses()
 {
 	uint32_t n = 100;						// Number of processes
 	uint32_t minArrivalTime = 1;			// Earliest possible arrival
@@ -21,7 +21,7 @@ vector<ProcessInfo> generateRandomProcesses()
 	uint32_t minExecuteTime = 1;			// Minimum time to execute
 	uint32_t maxExecuteTime = n / 2 ;		// Maximum time to execute
 
-	vector<ProcessInfo> list(n);
+	std::vector<ProcessInfo> list(n);
 	std::default_random_engine generator;
 	std::uniform_int_distribution<uint32_t> arrivalDistribution(minArrivalTime,
 		maxArrivalTime);

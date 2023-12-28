@@ -61,7 +61,7 @@ AlgorithmStats SJF(Scheduler& scheduler) {
 	
 	/*	Priority queue to store new processes as they arrive and sort based on job length
 	 */
-	std::priority_queue<ProcessInfo, vector<ProcessInfo>, BurstTimeComparator> pq;
+	std::priority_queue<ProcessInfo, std::vector<ProcessInfo>, BurstTimeComparator> pq;
 	uint32_t processIdx = 0;
 	uint32_t currentEndTime = 0;
 	ProcessInfo process;

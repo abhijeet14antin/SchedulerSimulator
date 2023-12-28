@@ -13,11 +13,9 @@
 
 #include "ProcessInfo.hpp"
 
-using std::vector;
-
 /**
  * Generates process using RNG
  *
  * \return A vector of processes generated
  */
-vector<ProcessInfo> generateRandomProcesses();
+std::vector<ProcessInfo> generateRandomProcesses();
