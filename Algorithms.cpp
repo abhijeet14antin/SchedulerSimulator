@@ -134,16 +134,13 @@ AlgorithmStats RR(Scheduler& scheduler, uint32_t numCyclesPerRound) {
 	size_t size = scheduler.processInfo.size();
 
 	/** Circular Queue to store current running processes */
-	CircularQueue cq(500);
+	CircularQueue cq(size);
 	uint32_t processIdx = 0;
 	ProcessInfo process;
 	uint32_t numCyclesInCurrentRound = 1;
 	bool isProcessRunning = false;
 
 	while (processIdx < scheduler.processInfo.size() || cq.currentSize != 0) {
-		if (stats.currentCycle > 50) {
-			//break;
-		}
 		//std::cout << "Cycle: " << stats.currentCycle << "\n";
 		/** First add any new processes that may have arrived, unless circular queue is full */
 		while (processIdx < size && scheduler.processInfo[processIdx].arrivalTime <= stats.currentCycle) {
