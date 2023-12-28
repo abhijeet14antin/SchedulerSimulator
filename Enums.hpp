@@ -1,6 +1,6 @@
 #pragma once
 
-enum class SchedulerAlgorithms 
+enum class SchedulerAlgorithmsEnum 
 {
 	INVALID,	// Default invalid algorithm
 	FCFS,		// First Come First Serve

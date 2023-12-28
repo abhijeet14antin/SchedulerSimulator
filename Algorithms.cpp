@@ -1,26 +1,26 @@
+/*****************************************************************//**
+ * \file   Algorithms.cpp
+ * \brief  Contains implementation of the various scheduling algorithms
+ * 
+ * \author abhij
+ * \date   December 2023
+ *********************************************************************/
+
 // TODO: Move everything here into scheduler class?
 
 #include "Algorithms.hpp"
 
 #include<iostream>
 
-AlgorithmStats::AlgorithmStats() {
-	totalTurnaroundTime = 0;
-	totalWaitTime = 0;
-	currentCycle = 0;
-	freeCycles = 0;
-	busyCycles = 0;
-	commandsProcessed = 0;
-	cpuUtilization = 0;
-	avgThroughput = 0;
-	avgTurnaroundTime = 0;
-	avgWaitTime = 0;
-	AlgorithmStats::algorithm = SchedulerAlgorithms::INVALID;
-}
-
+/**
+ * First Come First Served algorithm implementation
+ * 
+ * \param scheduler Takes a scheduler object
+ * \return Statistics of current algorithm
+ */
 AlgorithmStats FCFS(Scheduler& scheduler) {
 	AlgorithmStats stats;
-	stats.algorithm = SchedulerAlgorithms::FCFS;
+	stats.algorithm = SchedulerAlgorithmsEnum::FCFS;
 	size_t size = scheduler.processInfo.size();
 
 	for (auto& process : scheduler.processInfo) {
@@ -48,9 +48,15 @@ AlgorithmStats FCFS(Scheduler& scheduler) {
 	return stats;
 }
 
+/**
+ * Shortest Job First algorithm implementation
+ *
+ * \param scheduler Takes a scheduler object
+ * \return Statistics of current algorithm
+ */
 AlgorithmStats SJF(Scheduler& scheduler) {
 	AlgorithmStats stats;
-	stats.algorithm = SchedulerAlgorithms::SJF;
+	stats.algorithm = SchedulerAlgorithmsEnum::SJF;
 	size_t size = scheduler.processInfo.size();
 	
 	/*	Priority queue to store new processes as they arrive and sort based on job length
@@ -107,16 +113,29 @@ AlgorithmStats SJF(Scheduler& scheduler) {
 	return stats;
 }
 
+/**
+ * Shortest Remaning Time First algorithm implementation
+ * 
+ * \param scheduler Takes a scheduler object
+ * \return Statistics of current algorithm
+ */
 AlgorithmStats SRTF(Scheduler& scheduler) {
 	AlgorithmStats stats;
-	stats.algorithm = SchedulerAlgorithms::SRTF;
+	stats.algorithm = SchedulerAlgorithmsEnum::SRTF;
 
 	return stats;
 }
 
+/**
+ * Round Robin algorithm implementation
+ * 
+ * \param scheduler Takes a scheduler object
+ * \param numCyclesPerRound Size of each round in time cycles
+ * \return Statistics of current algorithm
+ */
 AlgorithmStats RR(Scheduler& scheduler, uint32_t numCyclesPerRound) {
 	AlgorithmStats stats;
-	stats.algorithm = SchedulerAlgorithms::RR;
+	stats.algorithm = SchedulerAlgorithmsEnum::RR;
 	size_t size = scheduler.processInfo.size();
 
 	/*	Circular Queue to store current running processes

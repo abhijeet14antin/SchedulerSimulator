@@ -1,3 +1,11 @@
+/*********************************************************************
+ * \file   ProcessInfo.hpp
+ * \brief  ProcessInfo class header
+ * 
+ * \author abhij
+ * \date   December 2023
+ *********************************************************************/
+
 #pragma once
 
 #include <cstdint>
@@ -16,22 +24,37 @@ public:
 	ProcessInfo();
 };
 
-/*	Object to compare using arrival time + burst time
-*/
+/**
+ * Object to compare using arrival time + burst time
+ *
+ * \param a
+ * \param b
+ * \return wheter a < b
+ */
 class ArrivalTimeComparator {
 public:
 	bool operator() (const ProcessInfo& a, const ProcessInfo& b);
 };
 
-/*	Object to compare using burst time + arrival time
-*/
+/**
+ * Object to compare using burst time + arrival time
+ *
+ * \param a
+ * \param b
+ * \return wheter a < b
+ */
 class BurstTimeComparator {
 public:
 	bool operator() (const ProcessInfo& a, const ProcessInfo& b);
 };
 
-/*	Object to compare using remaining time + arrival time
-*/
+/**
+ * Object to compare using remaining time + arrival time
+ *
+ * \param a
+ * \param b
+ * \return wheter a < b
+ */
 class RemainingTimeComparator {
 public:
 	bool operator() (const ProcessInfo& a, const ProcessInfo& b);

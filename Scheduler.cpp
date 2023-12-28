@@ -1,5 +1,18 @@
+/*****************************************************************//**
+ * \file   Scheduler.cpp
+ * \brief  Contains implementation of scheduler class
+ * 
+ * \author abhij
+ * \date   December 2023
+ *********************************************************************/
+
 #include "Scheduler.hpp"
 
+/**
+ * Constructor for Scheduler Class
+ * 
+ * \param processList Vector of process information
+ */
 Scheduler::Scheduler(vector<ProcessInfo>& processList) : processInfo(processList) {
 	for (const auto& process : processInfo) {
 		std::shared_ptr<ProcessInfo> processPtr (new ProcessInfo);

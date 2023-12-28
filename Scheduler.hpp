@@ -1,3 +1,11 @@
+/*********************************************************************
+ * \file   Scheduler.hpp
+ * \brief  Scheduler class declaration
+ * 
+ * \author abhij
+ * \date   December 2023
+ *********************************************************************/
+
 #pragma once
 
 #include <cstdint>
@@ -9,6 +17,9 @@
 
 using std::vector;
 
+/**
+ * Scheduler Class
+ */
 class Scheduler {
 public:
 	vector<ProcessInfo> processInfo;

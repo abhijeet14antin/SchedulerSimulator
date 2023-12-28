@@ -1,3 +1,11 @@
+/*********************************************************************
+ * \file   ProcessGenerator.hpp
+ * \brief  ProcessGenerator header
+ * 
+ * \author abhij
+ * \date   December 2023
+ *********************************************************************/
+
 #pragma once
 
 #include <vector>
@@ -7,4 +15,9 @@
 
 using std::vector;
 
+/**
+ * Generates process using RNG
+ *
+ * \return A vector of processes generated
+ */
 vector<ProcessInfo> generateRandomProcesses();

@@ -1,5 +1,18 @@
+/*********************************************************************
+ * \file   ProcessGenerator.cpp
+ * \brief  Definition of process generator
+ * 
+ * \author abhij
+ * \date   December 2023
+ *********************************************************************/
+
 #include "ProcessGenerator.hpp"
 
+/**
+ * Generates process using RNG
+ * 
+ * \return A vector of processes generated
+ */
 vector<ProcessInfo> generateRandomProcesses()
 {
 	uint32_t n = 100;						// Number of processes

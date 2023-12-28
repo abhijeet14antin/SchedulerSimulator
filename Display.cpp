@@ -1,7 +1,20 @@
+/*****************************************************************//**
+ * \file   Display.cpp
+ * \brief  Functions to display various info
+ * 
+ * \author abhij
+ * \date   December 2023
+ *********************************************************************/
+
 #include "Display.hpp"
 
 using std::cout;
 
+/**
+ * Displays process info
+ * 
+ * \param info Vector of process info
+ */
 void displayProcesses(std::vector<ProcessInfo> info) {
 	cout << "\nPID\t\tarrival\t\tburst\t\tstart\t\tcompletion\n";
 	for (const auto& item : info) {
@@ -11,6 +24,11 @@ void displayProcesses(std::vector<ProcessInfo> info) {
 	}
 }
 
+/**
+ * Displays process info that has been stored using pointers
+ * 
+ * \param infoPtrs Vector of pointers to process info
+ */
 void displayProcessesFromPtrs(std::vector<std::shared_ptr<ProcessInfo>> infoPtrs) {
 	cout << "\nPID\t\tarrival\t\tburst\t\tstart\t\tcompletion\n";
 	for (const auto& itemPtr : infoPtrs) {
@@ -20,19 +38,24 @@ void displayProcessesFromPtrs(std::vector<std::shared_ptr<ProcessInfo>> infoPtrs
 	}
 }
 
+/**
+ * Display algorithm statistics
+ * 
+ * \param stats The algorithm stats to be displayed
+ */
 void displayAlgorithmStats(AlgorithmStats stats) {
 	cout << "\nAlgorithm:\t\t";
 	switch (stats.algorithm) {
-	case SchedulerAlgorithms::FCFS:
+	case SchedulerAlgorithmsEnum::FCFS:
 		cout << "FCFS\n";
 		break;
-	case SchedulerAlgorithms::SJF:
+	case SchedulerAlgorithmsEnum::SJF:
 		cout << "SJF\n";
 		break;
-	case SchedulerAlgorithms::SRTF:
+	case SchedulerAlgorithmsEnum::SRTF:
 		cout << "SRTF\n";
 		break;
-	case SchedulerAlgorithms::RR:
+	case SchedulerAlgorithmsEnum::RR:
 		cout << "RR\n";
 		break;
 	}
