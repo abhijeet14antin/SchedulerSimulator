@@ -59,27 +59,22 @@ AlgorithmStats SJF(Scheduler& scheduler) {
 	stats.algorithm = SchedulerAlgorithmsEnum::SJF;
 	size_t size = scheduler.processInfo.size();
 	
-	/*	Priority queue to store new processes as they arrive and sort based on job length
-	 */
+	/** Priority queue to store new processes as they arrive and sort based on job length */
 	std::priority_queue<ProcessInfo, std::vector<ProcessInfo>, BurstTimeComparator> pq;
 	uint32_t processIdx = 0;
 	uint32_t currentEndTime = 0;
 	ProcessInfo process;
 
-	/*	This loop runs as long as there are processes remaining in the scheduler or in the pq
-	 */
+	/** This loop runs as long as there are processes remaining in the scheduler or in the pq */
 	while (processIdx < scheduler.processInfo.size() || pq.size() != 0) {
-		/*	Add all new processes that just arrived to PQ
-		 */
+		/** Add all new processes that just arrived to PQ */
 		while (processIdx < size && scheduler.processInfo[processIdx].arrivalTime == stats.currentCycle) {
 			pq.push(scheduler.processInfo[processIdx]);
 			processIdx++;
 		}
-		/*	If current running process is about to end or has already ended
-		 */
+		/** If current running process is about to end or has already ended */
 		if (currentEndTime <= stats.currentCycle) {
-			/* If no process in PQ, just update free cycles
-			 */
+			/** If no process in PQ, just update free cycles */
 			if (pq.size() == 0) {
 				stats.freeCycles++;
 			}
@@ -138,8 +133,7 @@ AlgorithmStats RR(Scheduler& scheduler, uint32_t numCyclesPerRound) {
 	stats.algorithm = SchedulerAlgorithmsEnum::RR;
 	size_t size = scheduler.processInfo.size();
 
-	/*	Circular Queue to store current running processes
-	 */
+	/** Circular Queue to store current running processes */
 	CircularQueue cq(100);
 	uint32_t processIdx = 0;
 	ProcessInfo process;
@@ -151,8 +145,7 @@ AlgorithmStats RR(Scheduler& scheduler, uint32_t numCyclesPerRound) {
 			//break;
 		}
 		//std::cout << "Cycle: " << stats.currentCycle << "\n";
-		/*	First add any new processes that may have arrived, unless circular queue is full
-		 */
+		/** First add any new processes that may have arrived, unless circular queue is full */
 		while (processIdx < size && scheduler.processInfo[processIdx].arrivalTime <= stats.currentCycle) {
 			bool enqueueSuccess = cq.enqueue(scheduler.processInfo[processIdx]);
 			if (enqueueSuccess) {
@@ -162,8 +155,7 @@ AlgorithmStats RR(Scheduler& scheduler, uint32_t numCyclesPerRound) {
 				break;
 			}
 		}
-		/*	If no process is running, get a new one from queue. If no processes in queue, continue to next cycle
-		 */
+		/** If no process is running, get a new one from queue. If no processes in queue, continue to next cycle */
 		if (!isProcessRunning) {
 			ProcessInfo temp;
 			bool dequeueSuccess = cq.dequeue(temp);
@@ -179,8 +171,7 @@ AlgorithmStats RR(Scheduler& scheduler, uint32_t numCyclesPerRound) {
 				}
 			}
 		}
-		/*	Give current process additional cycles until round is completed
-		 */
+		/** Give current process additional cycles until round is completed */
 		if (isProcessRunning) {
 			process.remainingTime--;
 			//std::cout << "processID: " << process.processID << "\n";
