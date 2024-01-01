@@ -20,6 +20,7 @@ public:
 	uint32_t remainingTime;		// Time remaining for current process
 	uint32_t completionTime;	// Time instant that process completes
 	uint32_t index;				// Index within vector, needed to update startTime, completionTime in original vector
+	uint32_t priority;			// Priority: 1 is highest priority, 5 is lowest priority
 	bool isStarted;				// Indicates whether process has started or not
 	ProcessInfo();
 };

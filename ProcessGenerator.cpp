@@ -15,11 +15,13 @@
  */
 std::vector<ProcessInfo> generateRandomProcesses()
 {
-	uint32_t n = 200;						// Number of processes
-	uint32_t minArrivalTime = 1;			// Earliest possible arrival
-	uint32_t maxArrivalTime = n * 2;		// Latest possible arrival
-	uint32_t minBurstTime = 1;			// Minimum time to execute
-	uint32_t maxBurstTime = n / 2 ;		// Maximum time to execute
+	uint32_t n = 200;						/* Number of processes */ 
+	uint32_t minArrivalTime = 1;			/* Earliest possible arrival */
+	uint32_t maxArrivalTime = n * 2;		/* Latest possible arrival */
+	uint32_t minBurstTime = 1;				/* Minimum time to execute */
+	uint32_t maxBurstTime = n / 2 ;			/* Maximum time to execute */
+	uint32_t minPriority = 1;				/* 1: highest priority */
+	uint32_t maxPriority = 5;				/* 5: lowest priority */
 
 	std::vector<ProcessInfo> list(n);
 	std::default_random_engine generator;
@@ -27,19 +29,22 @@ std::vector<ProcessInfo> generateRandomProcesses()
 		maxArrivalTime);
 	std::uniform_int_distribution<uint32_t> executeDistribution(minBurstTime,
 		maxBurstTime);
+	std::uniform_int_distribution<uint32_t> priorityDistribution(minPriority,
+		maxPriority);
 
 	for (uint32_t i = 0; i < n; i++) {
 		list[i].processID = i + 1;
 		list[i].arrivalTime = arrivalDistribution(generator);
 		list[i].burstTime = executeDistribution(generator);
+		list[i].priority = priorityDistribution(generator);
 		list[i].remainingTime = list[i].burstTime;
 		list[i].completionTime = 0;
 	}
 
-	// Sort list
+	/** Sort list */
 	sort(list.begin(), list.end(), ArrivalTimeComparator());
 
-	// Store vector indices in each object
+	/** Store vector indices in each object */
 	for (size_t i = 0; i < list.size(); i++) {
 		list[i].index = i;
 	}

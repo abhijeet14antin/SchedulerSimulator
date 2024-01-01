@@ -13,7 +13,7 @@
  * 
  */
 ProcessInfo::ProcessInfo() {
-	// Value of 0 means invalid for all fields
+	/** Value of 0 means invalid for all fields */
 	processID = 0;
 	arrivalTime = 0;
 	startTime = 0;
@@ -21,6 +21,7 @@ ProcessInfo::ProcessInfo() {
 	remainingTime = 0;
 	completionTime = 0;
 	index = 0;
+	priority = 0;
 	isStarted = false;
 }
 
