@@ -15,11 +15,16 @@ The project is split into the following phases:
  - Simulation using a single thread
 
 ### Phase III
+ - Single Core
+ - The processes have priorities
+ - Simulation using multiple threads
+
+### Phase IV
  - Multi Core
  - The processes have priorities
  - Simulation using a single thread
 
-### Phase IV
+### Phase V
  - Multi Core
  - The processes have priorities
  - Simulation using a multiple threads. Each process will run in a separate thread
