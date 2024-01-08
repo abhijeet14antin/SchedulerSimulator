@@ -15,7 +15,7 @@
 
 class CircularQueue {
 public:
-	uint32_t maxSize;
+	size_t maxSize;
 	uint32_t currentSize;
 	uint32_t front;
 	uint32_t back;
@@ -26,7 +26,7 @@ public:
 	 *
 	 * \param maxSize Maximum size for circular queue
 	 */
-	CircularQueue(uint32_t maxSize);
+	CircularQueue(size_t maxSize);
 
 	/**
 	 * Enqueue process in circular queue

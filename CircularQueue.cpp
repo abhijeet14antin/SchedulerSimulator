@@ -13,7 +13,7 @@
  * 
  * \param maxSize Maximum size for circular queue
  */
-CircularQueue::CircularQueue(uint32_t maxSize) {
+CircularQueue::CircularQueue(size_t maxSize) {
 	front = 0;
 	back = 0;
 	this->maxSize = maxSize;

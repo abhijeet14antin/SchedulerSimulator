@@ -21,6 +21,7 @@ public:
 	uint32_t completionTime;	// Time instant that process completes
 	uint32_t index;				// Index within vector, needed to update startTime, completionTime in original vector
 	bool isStarted;				// Indicates whether process has started or not
+	bool isCompleted;			// Indicates whether process has completed
 	ProcessInfo();
 };
 
@@ -29,7 +30,19 @@ public:
  *
  * \param a
  * \param b
- * \return wheter a < b
+ * \return whether a < b
+ */
+class ArrivalTimeComparatorForGeneration {
+public:
+	bool operator() (const ProcessInfo& a, const ProcessInfo& b);
+};
+
+/**
+ * Object to compare using arrival time + burst time
+ *
+ * \param a
+ * \param b
+ * \return whether a < b
  */
 class ArrivalTimeComparator {
 public:
@@ -41,7 +54,7 @@ public:
  *
  * \param a
  * \param b
- * \return wheter a < b
+ * \return whether a < b
  */
 class BurstTimeComparator {
 public:
@@ -53,7 +66,7 @@ public:
  *
  * \param a
  * \param b
- * \return wheter a < b
+ * \return whether a < b
  */
 class RemainingTimeComparator {
 public:

@@ -22,6 +22,7 @@ ProcessInfo::ProcessInfo() {
 	completionTime = 0;
 	index = 0;
 	isStarted = false;
+	isCompleted = false;
 }
 
 /**
@@ -29,11 +30,23 @@ ProcessInfo::ProcessInfo() {
  * 
  * \param a
  * \param b
- * \return wheter a < b
+ * \return whether a < b, used to sort generated processes initially
+ */
+bool ArrivalTimeComparatorForGeneration::operator() (const ProcessInfo& a, const ProcessInfo& b) {
+	return (a.arrivalTime < b.arrivalTime)
+		|| (a.arrivalTime == b.arrivalTime && a.burstTime < b.burstTime);
+}
+
+/**
+ * Object to compare using arrival time + burst time
+ *
+ * \param a
+ * \param b
+ * \return whether a < b, used to sort generated processes initially
  */
 bool ArrivalTimeComparator::operator() (const ProcessInfo& a, const ProcessInfo& b) {
 	return (a.arrivalTime < b.arrivalTime)
-		|| (a.arrivalTime == b.arrivalTime && a.burstTime < b.burstTime);
+		|| (a.arrivalTime == b.arrivalTime && a.burstTime > b.burstTime);
 }
 
 /**
@@ -41,7 +54,7 @@ bool ArrivalTimeComparator::operator() (const ProcessInfo& a, const ProcessInfo&
  * 
  * \param a
  * \param b
- * \return wheter a < b
+ * \return whether a < b
  */
 bool BurstTimeComparator::operator() (const ProcessInfo& a, const ProcessInfo& b) {
 	return (a.burstTime > b.burstTime)
@@ -53,7 +66,7 @@ bool BurstTimeComparator::operator() (const ProcessInfo& a, const ProcessInfo& b
  * 
  * \param a
  * \param b
- * \return wheter a < b
+ * \return whether a < b
  */
 bool RemainingTimeComparator::operator() (const ProcessInfo& a, const ProcessInfo& b) {
 	return (a.remainingTime > b.remainingTime)

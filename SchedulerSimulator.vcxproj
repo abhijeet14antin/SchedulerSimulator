@@ -143,6 +143,7 @@
     <ClInclude Include="Algorithms.hpp" />
     <ClInclude Include="AlgorithmStats.hpp" />
     <ClInclude Include="CircularQueue.hpp" />
+    <ClInclude Include="constants.hpp" />
     <ClInclude Include="Display.hpp" />
     <ClInclude Include="Enums.hpp" />
     <ClInclude Include="ProcessGenerator.hpp" />

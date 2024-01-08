@@ -10,8 +10,6 @@
 
 #include "Algorithms.hpp"
 
-#include<iostream>
-
 /**
  * First Come First Served algorithm implementation
  * 
@@ -21,9 +19,9 @@
 AlgorithmStats FCFS(Scheduler& scheduler) {
 	AlgorithmStats stats;
 	stats.algorithm = SchedulerAlgorithmsEnum::FCFS;
-	size_t size = scheduler.processInfo.size();
+	size_t size = scheduler.processInfoList.size();
 
-	for (auto& process : scheduler.processInfo) {
+	for (auto& process : scheduler.processInfoList) {
 		while (process.arrivalTime > stats.currentCycle) {
 			stats.freeCycles++;
 			stats.currentCycle++;
@@ -57,7 +55,7 @@ AlgorithmStats FCFS(Scheduler& scheduler) {
 AlgorithmStats SJF(Scheduler& scheduler) {
 	AlgorithmStats stats;
 	stats.algorithm = SchedulerAlgorithmsEnum::SJF;
-	size_t size = scheduler.processInfo.size();
+	size_t size = scheduler.processInfoList.size();
 	
 	/** Priority queue to store new processes as they arrive and sort based on job length */
 	std::priority_queue<ProcessInfo, std::vector<ProcessInfo>, BurstTimeComparator> pq;
@@ -66,10 +64,10 @@ AlgorithmStats SJF(Scheduler& scheduler) {
 	ProcessInfo process;
 
 	/** This loop runs as long as there are processes remaining in the scheduler or in the pq */
-	while (processIdx < scheduler.processInfo.size() || pq.size() != 0) {
+	while (processIdx < scheduler.processInfoList.size() || pq.size() != 0) {
 		/** Add all new processes that just arrived to PQ */
-		while (processIdx < size && scheduler.processInfo[processIdx].arrivalTime == stats.currentCycle) {
-			pq.push(scheduler.processInfo[processIdx]);
+		while (processIdx < size && scheduler.processInfoList[processIdx].arrivalTime == stats.currentCycle) {
+			pq.push(scheduler.processInfoList[processIdx]);
 			processIdx++;
 		}
 		/** If current running process is about to end or has already ended */
@@ -83,7 +81,7 @@ AlgorithmStats SJF(Scheduler& scheduler) {
 				pq.pop();
 				process.startTime = stats.currentCycle;
 				process.completionTime = stats.currentCycle + process.burstTime;
-				scheduler.processInfo[process.index] = process;
+				scheduler.processInfoList[process.index] = process;
 				currentEndTime = process.completionTime;
 
 				stats.commandsProcessed += 1;
@@ -131,7 +129,7 @@ AlgorithmStats SRTF(Scheduler& scheduler) {
 AlgorithmStats RR(Scheduler& scheduler, uint32_t numCyclesPerRound) {
 	AlgorithmStats stats;
 	stats.algorithm = SchedulerAlgorithmsEnum::RR;
-	size_t size = scheduler.processInfo.size();
+	size_t size = scheduler.processInfoList.size();
 
 	/** Circular Queue to store current running processes */
 	CircularQueue cq(size);
@@ -140,11 +138,11 @@ AlgorithmStats RR(Scheduler& scheduler, uint32_t numCyclesPerRound) {
 	uint32_t numCyclesInCurrentRound = 1;
 	bool isProcessRunning = false;
 
-	while (processIdx < scheduler.processInfo.size() || cq.currentSize != 0) {
+	while (processIdx < scheduler.processInfoList.size() || cq.currentSize != 0) {
 		//std::cout << "Cycle: " << stats.currentCycle << "\n";
 		/** First add any new processes that may have arrived, unless circular queue is full */
-		while (processIdx < size && scheduler.processInfo[processIdx].arrivalTime <= stats.currentCycle) {
-			bool enqueueSuccess = cq.enqueue(scheduler.processInfo[processIdx]);
+		while (processIdx < size && scheduler.processInfoList[processIdx].arrivalTime <= stats.currentCycle) {
+			bool enqueueSuccess = cq.enqueue(scheduler.processInfoList[processIdx]);
 			if (enqueueSuccess) {
 				processIdx++;
 			}
@@ -164,7 +162,7 @@ AlgorithmStats RR(Scheduler& scheduler, uint32_t numCyclesPerRound) {
 				if (!process.isStarted) {
 					process.startTime = stats.currentCycle;
 					process.isStarted = true;
-					scheduler.processInfo[process.index] = process;
+					scheduler.processInfoList[process.index] = process;
 				}
 			}
 		}
@@ -175,7 +173,7 @@ AlgorithmStats RR(Scheduler& scheduler, uint32_t numCyclesPerRound) {
 			if (process.remainingTime == 0) {
 				//std::cout << "remaining time = 0\n";
 				process.completionTime = stats.currentCycle + 1;
-				scheduler.processInfo[process.index] = process;
+				scheduler.processInfoList[process.index] = process;
 				numCyclesInCurrentRound = 1;
 				isProcessRunning = false;
 				stats.commandsProcessed += 1;
@@ -205,7 +203,7 @@ AlgorithmStats RR(Scheduler& scheduler, uint32_t numCyclesPerRound) {
 	stats.busyCycles += process.remainingTime;
 	stats.currentCycle += process.remainingTime;
 	process.completionTime = stats.currentCycle;
-	scheduler.processInfo[process.index] = process;
+	scheduler.processInfoList[process.index] = process;
 	/** Calculate final stats */
 	stats.cpuUtilization = (double)stats.busyCycles / stats.currentCycle;
 	stats.avgThroughput = (double)stats.commandsProcessed / stats.currentCycle;

@@ -12,6 +12,7 @@
 #include <random>
 
 #include "ProcessInfo.hpp"
+#include "constants.hpp"
 
 /**
  * Generates process using RNG

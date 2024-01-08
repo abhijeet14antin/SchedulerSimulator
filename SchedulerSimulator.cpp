@@ -37,32 +37,39 @@ int main() {
     std::vector<ProcessInfo> processInfo = generateRandomProcesses();
     Scheduler* scheduler;
 
-    bool displayProcessInfo = false;
+    bool displayProcessInfo = true;
     
     scheduler = new Scheduler(processInfo);
+    std::cout << "Single thread________________________:\n";
     AlgorithmStats stats = FCFS(*scheduler);
-    if (displayProcessInfo) displayProcesses(scheduler->processInfo);
+    if (displayProcessInfo) displayProcesses(scheduler->processInfoList);
+    displayAlgorithmStats(stats);
+    std::cout << "\n\nMultiple threads________________________\n";
+    stats = scheduler->FCFS();
+    if (displayProcessInfo) displayProcesses(scheduler->processInfoList);
     displayAlgorithmStats(stats);
 
+    /*
     scheduler = new Scheduler(processInfo);
     stats = SJF(*scheduler);
-    if (displayProcessInfo) displayProcesses(scheduler->processInfo);
+    if (displayProcessInfo) displayProcesses(scheduler->processInfoList);
     displayAlgorithmStats(stats);
 
     scheduler = new Scheduler(processInfo);
     stats = RR(*scheduler, 1);
-    if (displayProcessInfo) displayProcesses(scheduler->processInfo);
+    if (displayProcessInfo) displayProcesses(scheduler->processInfoList);
     displayAlgorithmStats(stats);
 
     scheduler = new Scheduler(processInfo);
     stats = RR(*scheduler, 2);
-    if (displayProcessInfo) displayProcesses(scheduler->processInfo);
+    if (displayProcessInfo) displayProcesses(scheduler->processInfoList);
     displayAlgorithmStats(stats);
 
     scheduler = new Scheduler(processInfo);
     stats = RR(*scheduler, 5);
-    if (displayProcessInfo) displayProcesses(scheduler->processInfo);
+    if (displayProcessInfo) displayProcesses(scheduler->processInfoList);
     displayAlgorithmStats(stats);
+    */
     
     /*
     stats = SRTF(scheduler);
